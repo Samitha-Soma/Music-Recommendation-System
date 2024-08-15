@@ -1,9 +1,10 @@
 show databases;
+--create database
 create database samitha;
 use samitha;
 
 -- Music recommendation database system
-
+-- create table
  create table users (
     user_id INT PRIMARY KEY,
     username VARCHAR(50),
@@ -44,11 +45,13 @@ insert into users (user_id,name,email,password,registration_date) values (1, 'An
     (28, 'Aryan', 'aryan@example.com', 'Aryan@28', '2024-04-25'),
     (29, 'Avni', 'avni@example.com', 'Anvi@29', '2024-04-25'),
     (30, 'Vihaan', 'vihaan@example.com', 'Vihaan@30', '2024-04-25');
+
+--display users table
+select* from users;
     
-    select* from users;
-    
-    
+--create artists table
 create table artists(artist_id int primary key, artist_name varchar(30), genre varchar(10));
+--insert values into artists table
 insert into artists(artist_id,artist_name,genre) values (1, 'Arijit Singh', 'Bollywood'),
     (2, 'Shreya Ghoshal', 'Bollywood'),
     (3, 'A.R. Rahman', 'Bollywood'),
@@ -140,6 +143,7 @@ insert into user_playlists(playlist_id,user_id,playlist_name,creation_date) valu
     (18, 18, 'Late Night Jazz', '2024-04-25'),
     (19, 19, 'Soulful Rhythms', '2024-04-25'),
     (20, 20, 'EDM Extravaganza', '2024-04-25');
+
 select*from user_playlists;
 
 create table recommendations(recommendation_id int primary key,user_id int,song_id int,recommendation_date date,foreign key(user_id) references users(user_id),foreign key(song_id) references songs(song_id));
@@ -163,6 +167,7 @@ insert into recommendations(recommendation_id,user_id,song_id,recommendation_dat
     (18, 9, 18, '2024-04-25'),
     (19, 10, 19, '2024-04-25'),
     (20, 10, 20, '2024-04-25');
+
 select*from recommendations;
 
 --Sub queries questions
@@ -172,7 +177,7 @@ select user_id,name,registration_date from users where registration_date= (selec
 
 /*2.Retrieve the title of the album with the highest rated song*/
 SELECT * FROM albums WHERE album_id = ( SELECT album_id FROM songs WHERE song_id = (SELECT song_id FROM Recommendations
-GROUP BY song_id ORDER BY COUNT()DESC LIMIT 1));
+GROUP BY song_id ORDER BY COUNT(*)DESC LIMIT 1));
 
 /*3.Retreive the names of users who have not recieved any recommendations*/
 select*from recommendations;
@@ -214,3 +219,5 @@ SELECT * FROM artists WHERE artist_name LIKE 'A%';
 
 -- 2.Find all songs with titles containing a specific word or phrase
 SELECT * FROM Songs WHERE song_title LIKE 'T%';
+
+
